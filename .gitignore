@@ -9,6 +9,9 @@ test_data
 *.xml
 *.zip
 
+# Lab24 text file
+mystery.txt
+
 # Created by https://www.gitignore.io/api/java,intellij,eclipse,vim,emacs,microsoftoffice,netbeans,bluej
 *.pyc
 .DS_Store
