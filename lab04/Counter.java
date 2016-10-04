@@ -13,9 +13,10 @@ public class Counter {
     public void reset() {
         myCount = 0;
     }
-    
+
     public int value() {
         return myCount;
     }
 
 }
+
