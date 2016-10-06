@@ -6,25 +6,35 @@
 
 public class IntList {
 
-    /** The integer stored by this node. */
+    /**
+     * The integer stored by this node.
+     */
     private int item;
-    /** The next node in this IntList. */
+    /**
+     * The next node in this IntList.
+     */
     private IntList next;
 
-    /** Constructs an IntList storing ITEM and next node NEXT. */
+    /**
+     * Constructs an IntList storing ITEM and next node NEXT.
+     */
     public IntList(int item, IntList next) {
         this.item = item;
         this.next = next;
     }
 
-    /** Constructs an IntList storing ITEM and no next node. */
+    /**
+     * Constructs an IntList storing ITEM and no next node.
+     */
     public IntList(int item) {
         this(item, null);
     }
 
-    /** Returns an IntList consisting of the elements in ITEMS.
-      * IntList L = IntList.list(1, 2, 3);
-      * System.out.println(L.toString()) // Prints (1 2 3) */
+    /**
+     * Returns an IntList consisting of the elements in ITEMS.
+     * IntList L = IntList.list(1, 2, 3);
+     * System.out.println(L.toString()) // Prints (1 2 3)
+     */
     public static IntList list(int... items) {
         /** Check for cases when we have no element given. */
         if (items.length == 0) {
@@ -41,12 +51,16 @@ public class IntList {
         return head;
     }
 
-    /** Returns the integer stored by this IntList. */
+    /**
+     * Returns the integer stored by this IntList.
+     */
     public int item() {
         return item;
     }
 
-    /** Returns the next node stored by this IntList. */
+    /**
+     * Returns the next node stored by this IntList.
+     */
     public IntList next() {
         return next;
     }
@@ -59,8 +73,17 @@ public class IntList {
      * @return The element at [position]
      */
     public int get(int position) {
-        // YOUR CODE HERE
-        return 0;
+        if (position < 0 || position > this.size() - 1)
+            throw new IllegalArgumentException("invalid position!");
+        else {
+            int step = 0;
+            IntList tmp = this;// as head
+            while (step != position) {
+                tmp = tmp.next();
+                step++;
+            }
+            return tmp.item();
+        }
     }
 
     /**
@@ -69,8 +92,14 @@ public class IntList {
      * @return The size of the list.
      */
     public int size() {
+        int count = 0;
+        IntList tmp = this;
+        while (tmp != null) {
+            tmp = tmp.next();
+            count++;
+        }
         // YOUR CODE HERE
-        return 0;
+        return count;
     }
 
     /**
@@ -81,7 +110,14 @@ public class IntList {
      */
     public String toString() {
         // YOUR CODE HERE
-        return null;
+        IntList tmp = this;
+        String output = "(";
+        for (int i = 0; i < this.size(); i++) {
+            output = output + Integer.toString(tmp.item());
+            tmp = tmp.next();
+        }
+        output = output + ")";
+        return output;
     }
 
     /**
@@ -92,7 +128,7 @@ public class IntList {
      */
     public boolean equals(Object obj) {
         // YOUR CODE HERE
-        return false;
+        return this.toString().equals(obj.toString());
     }
 
     /**
@@ -102,6 +138,11 @@ public class IntList {
      */
     public void add(int item) {
         // YOUR CODE HERE
+        IntList tmp = this;
+        while (tmp.next() != null) {
+            tmp = tmp.next();
+        }
+        tmp.next = new IntList(item);
     }
 
     /**
@@ -110,7 +151,15 @@ public class IntList {
      * @return smallest element in the list
      */
     public int smallest() {
+        int holder = Integer.MAX_VALUE;
         // YOUR CODE HERE
+        IntList tmp = this;
+        while (tmp != null) {
+
+            if (tmp.item() < holder)
+                    holder = tmp.item();
+            tmp = tmp.next();
+        }
         return 0;
     }
 
@@ -121,7 +170,12 @@ public class IntList {
      */
     public int squaredSum() {
         // YOUR CODE HERE
-        return 0;
+        int totalSum = 0;
+        IntList tmp = this;
+        while (tmp != null) {
+            totalSum = totalSum + (int)Math.pow(tmp.item(),2);
+        }
+        return totalSum;
     }
 
     /**
@@ -134,6 +188,11 @@ public class IntList {
      */
     public static IntList append(IntList l1, IntList l2) {
         // YOUR CODE HERE
-        return null;
+        IntList tmp = l1;
+        while (tmp.next() != null) {
+            tmp = tmp.next();
+        }
+        tmp.next = l2;
+        return l1;
     }
 }
