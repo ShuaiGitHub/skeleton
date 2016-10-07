@@ -29,7 +29,10 @@ public class IntList {
     public IntList(int item) {
         this(item, null);
     }
-
+    public IntList(IntList old){
+        this.item = old.item();
+        this.next = old.next();
+    }
     /**
      * Returns an IntList consisting of the elements in ITEMS.
      * IntList L = IntList.list(1, 2, 3);
@@ -61,6 +64,16 @@ public class IntList {
     /**
      * Returns the next node stored by this IntList.
      */
+    public static IntList duplicate(IntList old){
+        IntList tmp =new IntList(old.item());
+        IntList iterator = old;
+        IntList tmp2 = tmp;
+        while (iterator.next() != null) {
+            tmp.next = new IntList(iterator.next().item());
+        }
+        return tmp2;
+    }
+
     public IntList next() {
         return next;
     }
@@ -113,10 +126,10 @@ public class IntList {
         IntList tmp = this;
         String output = "(";
         for (int i = 0; i < this.size(); i++) {
-            output = output + Integer.toString(tmp.item());
+            output = output + " "+Integer.toString(tmp.item());
             tmp = tmp.next();
         }
-        output = output + ")";
+        output = output + " )";
         return output;
     }
 
@@ -160,7 +173,7 @@ public class IntList {
                     holder = tmp.item();
             tmp = tmp.next();
         }
-        return 0;
+        return holder;
     }
 
     /**
@@ -174,6 +187,7 @@ public class IntList {
         IntList tmp = this;
         while (tmp != null) {
             totalSum = totalSum + (int)Math.pow(tmp.item(),2);
+            tmp = tmp.next();
         }
         return totalSum;
     }
@@ -186,13 +200,36 @@ public class IntList {
      * @param l2 list to be on the back of the new list.
      * @return new list with L1 followed by L2.
      */
+    // REWRITE THIS!
     public static IntList append(IntList l1, IntList l2) {
         // YOUR CODE HERE
-        IntList tmp = l1;
-        while (tmp.next() != null) {
-            tmp = tmp.next();
+        IntList it_list = l1;
+        if (l1!=null) {
+            IntList tmp = new IntList(l1.item());
+            IntList tmp2 = tmp;
+            while (it_list.next() != null) {
+                tmp.next = new IntList(it_list.next());
+                it_list = it_list.next();
+                tmp = tmp.next();
+            }
+            it_list = l2;
+            while (it_list != null) {
+                tmp.next = new IntList(it_list.item());
+                it_list = it_list.next();
+                tmp = tmp.next();
+            }
+            return tmp2;
         }
-        tmp.next = l2;
-        return l1;
+        else {
+            it_list = l2;
+            IntList tmp = new IntList(l2.item());
+            IntList tmp2 = tmp;
+            while (it_list.next() != null) {
+                tmp.next = new IntList(it_list.next());
+                it_list = it_list.next();
+                tmp = tmp.next();
+            }
+            return tmp2;
+        }
     }
 }
