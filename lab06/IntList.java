@@ -1,3 +1,5 @@
+import com.sun.istack.internal.NotNull;
+
 /** A data structure to represent a Linked List of Integers.
  * Each IntList represents one node in the overall Linked List.
  * Encapsulated version.
@@ -7,12 +9,59 @@ public class IntList {
     private IntListNode head;
     private int size;
 
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "IntList{" +
+                ", size=" + size +
+                '}';
+    }
+    public static void main(){
+        int[] a ={1,2,3,4,5};
+        IntList test = new IntList(a);
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IntList intList = (IntList) o;
+
+        return size == intList.size;
+
+    }
+
     /** IntListNode is a nested class. It can be instantiated when associated with an instance of
      *  IntList.
      *  **/
     public class IntListNode {
         int item;
         IntListNode next;
+
+        @java.lang.Override
+        public java.lang.String toString() {
+            return "IntListNode{" +
+                    "item=" + item +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            IntListNode that = (IntListNode) o;
+
+            if (item != that.item) return false;
+            return next.equals(that.next);
+
+        }
+
+        @Override
+        public int hashCode() {
+            return item;
+        }
 
         public IntListNode(int item, IntListNode next) {
             this.item = item;
@@ -24,8 +73,25 @@ public class IntList {
         return size;
     }
 
-    public IntList() {}
-
+    public IntList() { size=0;}
+    public IntList(IntList a) {
+        if (a.head==null) {
+            head = null;
+            size=0;
+        }
+        else {
+            IntListNode iterator = new IntListNode(a.head.item,null);
+            IntListNode Head = iterator;
+            int ref_size = a.getSize();
+            for (int i = 1; i < ref_size; i++) {
+                IntListNode tmp = new IntListNode(a.get(i),null);
+                iterator.next = tmp;
+                iterator = tmp;
+            }
+            this.head = Head;
+            this.size = a.size;
+        }
+    }
     public IntList(int[] initial) {
         for (int i = initial.length - 1; i >= 0; i--) {
             head = new IntListNode(initial[i], head);
@@ -42,15 +108,25 @@ public class IntList {
     public int get(int position) {
         if (position >= size) throw new IndexOutOfBoundsException("Position larger than size of list.");
         IntListNode curr = head;
+        if (curr == null)
+                throw new NullPointerException("This is an empty list!");
         while (position > 0) {
             curr = curr.next;
             position--;
         }
         return curr.item;
     }
-
     /* Fill in below! */
-
+    @NotNull
+    public IntListNode getNode(int position) {
+        if (position >= size) throw new IndexOutOfBoundsException("Position larger than size of list.");
+        IntListNode curr = head;
+        while (position > 0) {
+            curr = curr.next;
+            position--;
+        }
+        return curr;
+    }
     /**
      * Insert a new node into the IntList.
      * @param x value to insert
@@ -59,7 +135,42 @@ public class IntList {
      */
     public void insert(int x, int position) {
         // Fill me in!
+
+        if (position < 0)
+                throw new IndexOutOfBoundsException("position can not be negative");
+        else if (position >= size) {
+            try {
+                IntListNode lastItem = getNode(size - 1);
+                lastItem.next = new IntListNode(x, null);
+            } catch (NullPointerException e){
+                head = new IntListNode(x, null);
+                size++;
+                return;
+            }
+        } else {
+            IntListNode curr = head;
+            IntListNode prev = null;
+            if (curr == null) {
+                head = new IntListNode(x, null);
+                size++;
+            } else {
+                while (position > 0) {
+                    prev = curr;
+                    curr = curr.next;
+                    position--;
+                }
+                if (prev != null) {
+                    IntListNode tmp = new IntListNode(x, curr);
+                    prev.next = tmp;
+                } else {
+                    IntListNode tmp = new IntListNode(x, curr);
+                    tmp = head;
+                }
+            }
+        }
+        size++;
     }
+
 
     /**
      * Merge two sorted IntLists a and b into one sorted IntList containing all of their elements.
@@ -67,7 +178,13 @@ public class IntList {
      */
     public static IntList merge(IntList a, IntList b) {
         // Fill me in!
-        return null;
+        IntList firstItem = new IntList(a);// value-based copy
+        IntList lastItem = new IntList(b);// value-based copy
+        assert(firstItem.size== a.size);
+        assert (lastItem.size==b.size);
+        IntListNode lastNode = firstItem.getNode(firstItem.size-1);
+        lastNode.next = lastItem.head;
+        return firstItem;
     }
 
     /**

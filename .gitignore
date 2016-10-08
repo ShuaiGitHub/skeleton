@@ -8,7 +8,7 @@ test_data
 *.osm
 *.xml
 *.zip
-
+*/out/
 # Lab24 text file
 mystery.txt
 
