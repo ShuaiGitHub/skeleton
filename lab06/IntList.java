@@ -1,4 +1,5 @@
 import com.sun.istack.internal.NotNull;
+import java.util.ArrayList;
 
 /** A data structure to represent a Linked List of Integers.
  * Each IntList represents one node in the overall Linked List.
@@ -164,7 +165,7 @@ public class IntList {
                     prev.next = tmp;
                 } else {
                     IntListNode tmp = new IntListNode(x, curr);
-                    tmp = head;
+                    head = tmp;
                 }
             }
         }
@@ -178,13 +179,37 @@ public class IntList {
      */
     public static IntList merge(IntList a, IntList b) {
         // Fill me in!
-        IntList firstItem = new IntList(a);// value-based copy
-        IntList lastItem = new IntList(b);// value-based copy
-        assert(firstItem.size== a.size);
-        assert (lastItem.size==b.size);
-        IntListNode lastNode = firstItem.getNode(firstItem.size-1);
-        lastNode.next = lastItem.head;
-        return firstItem;
+        IntListNode head_it_a = a.head;
+        IntListNode head_it_b = b.head;
+
+        int[] arr= new int[a.size+b.size];
+        int count = 0;
+        while (head_it_a!=null && head_it_b !=null) {
+                int getItem_a = head_it_a.item;
+                int getItem_b = head_it_b.item;
+            if (getItem_a < getItem_b) {
+                arr[count]=getItem_a;
+                head_it_a = head_it_a.next;
+                count++;
+            } else {
+                    arr[count]=getItem_b;
+                    head_it_b = head_it_b.next;
+                count++;
+                }
+            }
+            while(head_it_a!=null) {
+                int getItem_a = head_it_a.item;
+                arr[count]=getItem_a;
+                head_it_a = head_it_a.next;
+                count++;
+            }
+            while(head_it_b!=null) {
+            int getItem_b = head_it_b.item;
+            arr[count]=getItem_b;
+            head_it_b = head_it_b.next;
+                count++;
+            }
+        return new IntList(arr);
     }
 
     /**
