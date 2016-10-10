@@ -217,6 +217,21 @@ public class IntList {
      */
     public void reverse() {
         // Fill me in!
+        this.head =reverseHelper(this.head);
+    }
+    public static IntListNode reverseHelper(IntListNode cur) {
+        if (cur == null) {
+            return cur;
+        } else if (cur.next == null) {
+            return cur;
+        } else {
+            IntListNode new_head = reverseHelper(cur.next);
+            IntListNode tmp = cur.next;
+            tmp.next = cur;
+            cur.next = null;
+            return new_head;
+        }
+
     }
 
     /* Optional! */
