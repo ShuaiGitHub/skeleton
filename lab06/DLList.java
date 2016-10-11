@@ -73,6 +73,22 @@ public class DLList {
      */
     public void insert(Object o, int position) {
         // fill me in
+        if (position>=size) {
+            position = size;
+        } else {
+            ;
+        }
+            DLNode iter = sentinel;
+            iter = iter.next;
+            int count = 0;
+            while (count != position) {
+                count++;
+                iter = iter.next;
+            }
+            DLNode n = new DLNode(o,iter.prev,iter);
+            n.prev.next = n;
+            n.next.prev = n;
+            size++;
     }
 
     /**
@@ -81,6 +97,14 @@ public class DLList {
      */
     public void insertFront(Object o) {
         // fill me in
+        DLNode n = new DLNode(o,sentinel,sentinel.next);
+        n.prev.next = n;
+        if (n.next ==null) {
+            ;
+        } else {
+            n.next.prev = n;
+        }
+        size++;
     }
 
     /**
@@ -89,6 +113,23 @@ public class DLList {
      */
     public void remove(Object o) {
         // fill me in
+        DLNode iter = sentinel.next;
+        while (iter != null && iter != sentinel) {
+            if (iter.item.equals(o)) {
+                iter.prev.next = iter.next;
+                if (iter.next == null) {
+                    iter = iter.next;
+                } else {
+                    DLNode tmp = iter.next;
+                    iter.next.prev = iter.prev;
+                    iter = tmp;
+                }
+                size--;
+            }
+            else {
+                iter = iter.next;
+            }
+        }
     }
 
     /**
@@ -98,6 +139,23 @@ public class DLList {
      */
     public void remove(DLNode n) {
         // fill me in
+        DLNode iter = sentinel.next;
+        while (iter != null && iter != sentinel) {
+            if (iter.equals(n)) {
+                iter.prev.next = iter.next;
+                if (iter.next == null) {
+                    iter = iter.next;
+                } else {
+                    DLNode tmp = iter.next;
+                    iter.next.prev = iter.prev;
+                    iter = tmp;
+                }
+                size--;
+            }
+            else {
+                iter = iter.next;
+            }
+        }
     }
 
 

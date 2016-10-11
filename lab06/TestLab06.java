@@ -53,7 +53,9 @@ public class TestLab06 {
         assertEquals(1, l.get(0));
         l.insert(4, 1);
         assertEquals(4, l.get(1));
+
         l.insert(1, 10);
+        assertEquals(4,l.size);
         // List is 1, 4, 2, 1
         assertEquals(l.sentinel, l.sentinel.next.next.next.next.prev.prev.prev.prev);
         l.remove(1);
