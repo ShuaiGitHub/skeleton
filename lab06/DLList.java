@@ -164,6 +164,9 @@ public class DLList {
      */
     public void doubleInPlace() {
         // fill me in
+        DLNode it = sentinel.next;
+        DLNode new_sentinel = new DLNode(null,null,null);
+        
     }
 
     /**
@@ -171,6 +174,16 @@ public class DLList {
      */
     public void reverse() {
         // fill me in
+        DLNode reverse_it = sentinel.next;
+        DLNode new_sentinel = new DLNode(null,null,null);
+        //DLNode prev = new_sentinel;
+        while (reverse_it != null) { // reversely iterate current list
+              DLNode n = new DLNode(reverse_it.item, new_sentinel.prev, new_sentinel);
+            n.prev.next = n;
+            n.next.prev = n;
+            reverse_it = reverse_it.next;
+        }
+        this.sentinel = new_sentinel;
     }
 
     public static void main(String[] args) {
