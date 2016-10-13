@@ -166,7 +166,19 @@ public class DLList {
         // fill me in
         DLNode it = sentinel.next;
         DLNode new_sentinel = new DLNode(null,null,null);
-        
+        new_sentinel.prev = new_sentinel;
+        new_sentinel.next = new_sentinel;
+        while (it != null && it!=sentinel) {
+            DLNode tmp = new DLNode(it.item,new_sentinel.prev,new_sentinel);
+            tmp.next.prev = tmp;
+            tmp.prev.next = tmp;
+            tmp = new DLNode(it.item,new_sentinel.prev,new_sentinel);
+            tmp.next.prev = tmp;
+            tmp.prev.next = tmp;
+            it = it.next;
+        }
+        this.size = this.size*2;
+        this.sentinel = new_sentinel;
     }
 
     /**
@@ -179,8 +191,8 @@ public class DLList {
         //DLNode prev = new_sentinel;
         while (reverse_it != null) { // reversely iterate current list
               DLNode n = new DLNode(reverse_it.item, new_sentinel.prev, new_sentinel);
-            n.prev.next = n;
             n.next.prev = n;
+            n.prev.next = n;
             reverse_it = reverse_it.next;
         }
         this.sentinel = new_sentinel;
