@@ -10,5 +10,8 @@ public class FrenchRevolutionaryDate extends Date {
     public int dayOfYear() {
         return (month() - 1) * 30 + dayOfMonth();
     }
-
+    @Override
+    public FrenchRevolutionaryDate nextDate(){
+        return new FrenchRevolutionaryDate(year(),month(),dayOfMonth()+1);
+    }
 }

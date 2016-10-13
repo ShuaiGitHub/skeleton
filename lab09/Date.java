@@ -4,7 +4,7 @@ public abstract class Date {
     private int dayOfMonth;
     private int month;
     private int year;
-
+    public abstract Date nextDate();
     public Date(int year, int month, int dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
         this.month = month;

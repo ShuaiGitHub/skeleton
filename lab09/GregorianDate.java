@@ -15,5 +15,9 @@ public class GregorianDate extends Date {
         }
         return rtnValue + dayOfMonth();
     }
+    @Override
+    public GregorianDate nextDate() {
+        return new GregorianDate(year(),month(),dayOfMonth()+1);
+    }
 
 }
