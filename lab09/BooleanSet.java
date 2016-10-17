@@ -27,15 +27,18 @@ public class BooleanSet implements SimpleSet {
 	// Return true if k is in this set, false otherwise.
 	public boolean contains (int k) {
 		// YOUR CODE HERE
+		return true;
 	}
 	
 	// Return true if this set is empty, false otherwise.
 	public boolean isEmpty() {
 		// YOUR CODE HERE
+		return true;
 	}
 
 	// Returns the number of items in the set
 	public int size() {
 		// YOUR CODE HERE
+		return 0;
 	}
 }

@@ -12,6 +12,18 @@ public class FrenchRevolutionaryDate extends Date {
     }
     @Override
     public FrenchRevolutionaryDate nextDate(){
+        int old_year = year();
+        int old_month = month();
+        int old_dayOfMonth = dayOfMonth();
+        int new_year = old_year;
+        int new_month = old_month;
+        int new_dayOfMonth = old_dayOfMonth;
+
+        if (old_month == 12) {
+            if (old_dayOfMonth == 5) {
+
+            }
+        }
         return new FrenchRevolutionaryDate(year(),month(),dayOfMonth()+1);
     }
 }
