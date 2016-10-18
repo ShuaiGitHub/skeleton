@@ -15,12 +15,14 @@ public class FixedSizeList implements SimpleList {
     // contained in values
     public int size() {
         // YOUR CODE HERE
+        return 0;
     }
 
     // This method should return true if the list
     // is empty, otherwise return false
     public boolean isEmpty() {
         // YOUR CODE HERE
+        return true;
     }
 
     // Add the argument to the list by placing it in the first
@@ -39,11 +41,13 @@ public class FixedSizeList implements SimpleList {
     // This method returns whether or not the collection contains k
     public boolean contains(int k) {
         // YOUR CODE HERE
+        return true;
     }
 
     // Returns the integer stored at the i-th index in the List
     public int get(int i) {
         // YOUR CODE HERE
+        return 0;
     }
 
     // Insert k into the sequence at position i,
@@ -52,7 +56,7 @@ public class FixedSizeList implements SimpleList {
     // Assumptions: The array isn't full, i.e. count < values.length
     // Also, i is between 0 and count, inclusive.
     public void add(int i, int k) {
-        for (int k = i + 1; k <= count; k++) {
+        for (k = i + 1; k <= count; k++) {
             values[k] = values[k-1];
         }
         values[i] = k;
