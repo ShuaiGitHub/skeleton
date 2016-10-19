@@ -1,6 +1,29 @@
-public class DLList<T> {
+import java.util.Iterator;
+public class DLList<T> implements Iterable<DLList.DLNode> {
     DLNode sentinel;
     int size;
+    public Iterator<DLList.DLNode> iterator() {
+        return new DLListIterator();
+    }
+    private class DLListIterator implements Iterator<DLList.DLNode>{
+        private DLNode start;
+        public DLListIterator(){
+            start = sentinel;
+        }
+        public DLNode<T> next(){
+            start = start.next;
+            return start;
+        }
+        public boolean hasNext(){
+            if (start.next.equals(sentinel)) {
+                return false;
+            } else {
+                return true;
+            }
+
+
+        }
+    }
 
     public class DLNode<T> {
         T item;
@@ -171,8 +194,11 @@ public class DLList<T> {
         l.insertBack("CS");
         //l.insertBack(61);
         l.insertBack("BL!");
+        Iterator<DLList.DLNode> it = l.iterator();
+        for (DLNode item:l) {
+            System.out.println(item);
+        }
         System.out.println("l = " + l);
-
         //l.insertBack(2);
         //l.insertFront(1);
         System.out.println("l.get(0) = " + l.get(0));
