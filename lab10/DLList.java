@@ -1,12 +1,12 @@
-public class DLList {
+public class DLList<T> {
     DLNode sentinel;
     int size;
 
-    public class DLNode {
-        Object item;
+    public class DLNode<T> {
+        T item;
         DLNode prev, next;
 
-        public DLNode(Object item, DLNode prev, DLNode next) {
+        public DLNode(T item, DLNode prev, DLNode next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
@@ -45,7 +45,7 @@ public class DLList {
      * Insert into the end of this list
      * @param o Object to insert
      */
-    public void insertBack(Object o) {
+    public void insertBack(T o) {
         DLNode n = new DLNode(o, sentinel.prev, sentinel);
         n.next.prev = n;
         n.prev.next = n;
@@ -59,13 +59,13 @@ public class DLList {
      * @param position to get from
      * @return the Object at the position in the list.
      */
-    public Object get(int position) {
+    public T get(int position) {
         DLNode curr = sentinel.next;
         while (position > 0 && curr != sentinel) {
             curr = curr.next;
             position--;
         }
-        return curr.item;
+        return (T) curr.item;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class DLList {
      * @param position position to insert into. If position exceeds the size of the list, insert into
      *            the end of the list.
      */
-    public void insert(Object o, int position) {
+    public void insert(T o, int position) {
         DLNode curr = sentinel;
         while (position > 0 && curr.next != sentinel) {
             curr = curr.next;
@@ -104,7 +104,7 @@ public class DLList {
      * Insert into the front of this list. You should can do this with a single call to insert().
      * @param o Object to insert
      */
-    public void insertFront(Object o) {
+    public void insertFront(T o) {
         insert(o, 0);
     }
 
@@ -112,7 +112,7 @@ public class DLList {
      * Remove all copies of Object o in this list
      * @param o Object to remove
      */
-    public void remove(Object o) {
+    public void remove(T o) {
         DLNode curr = sentinel.next;
         while (curr != sentinel) {
             if (curr.item.equals(o)) {
@@ -163,17 +163,21 @@ public class DLList {
     }
 
     public static void main(String[] args) {
-        DLList l = new DLList();
+        //DLList l = new DLList();
+        DLList<String> l = new DLList<>();
+        l.insertFront("Me");
+        l.insertBack("ow~!");
+        System.out.println(l.get(0) + l.get(1));
         l.insertBack("CS");
-        l.insertBack(61);
+        //l.insertBack(61);
         l.insertBack("BL!");
         System.out.println("l = " + l);
 
-        l.insertBack(2);
-        l.insertFront(1);
+        //l.insertBack(2);
+        //l.insertFront(1);
         System.out.println("l.get(0) = " + l.get(0));
-        l.insert(4, 1);
-        l.remove(1);
+        //l.insert(4, 1);
+        //l.remove(1);
         System.out.println("l = " + l);
         l.doubleInPlace();
         System.out.println("l = " + l);

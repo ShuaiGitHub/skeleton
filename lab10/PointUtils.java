@@ -12,9 +12,16 @@ public class PointUtils {
 	public static Point highestPoint(List<Point> points) {
 		/* This is the equivalent of the initialization step mentioned in lab. */
 		Iterator<Point> pointIterator = points.iterator();
-
+		Point highPoint = new Point(0,0);
+		while (pointIterator.hasNext()) {
+			Point newPoint = pointIterator.next();
+			if (newPoint.getY()>highPoint.y) {
+				highPoint = newPoint;
+			}
+		}
+		return highPoint;
 		// TODO use the iterator to complete this method!
-		return null;
+		//return null;
 	}
 
 	/**
