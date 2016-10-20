@@ -63,7 +63,6 @@ public class DLList<T> implements Iterable<DLList.DLNode> {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
     }
-
     /**
      * Insert into the end of this list
      * @param o Object to insert
@@ -82,7 +81,7 @@ public class DLList<T> implements Iterable<DLList.DLNode> {
      * @param position to get from
      * @return the Object at the position in the list.
      */
-    public T get(int position) {
+    private T get(int position) {
         DLNode curr = sentinel.next;
         while (position > 0 && curr != sentinel) {
             curr = curr.next;
@@ -195,7 +194,7 @@ public class DLList<T> implements Iterable<DLList.DLNode> {
         //l.insertBack(61);
         l.insertBack("BL!");
         Iterator<DLList.DLNode> it = l.iterator();
-        for (DLNode item:l) {
+        for (DLList.DLNode item:l) {
             System.out.println(item);
         }
         System.out.println("l = " + l);
