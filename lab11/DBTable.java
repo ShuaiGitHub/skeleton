@@ -55,7 +55,9 @@ public class DBTable<T> {
      * @return A List of the contents of this table, ordered by the result of the getter.
      */
     public <R extends Comparable<R>> List<T> getOrderedBy(Function<T, R> getter) {
-        return null; // FIX ME
+        List<T> tmp = this.getEntries();
+        Collections.sort(tmp,(o1,o2)->(getter.apply(o1).compareTo(getter.apply(o2))));
+        return tmp;
     }
 
     /**
@@ -104,6 +106,8 @@ public class DBTable<T> {
                 new User(1, "sarahjkim", "potato@potato.com"),
                 new User(1, "alanyao", "potato@cs61bl.org")
         ));
+        List<User> l = t.getOrderedBy(User::getUsername);
+        System.out.println(l);
         System.out.println("t = " + t.groupByWhitelist(User::getId, Arrays.asList(1, 2)));
     }
 }
